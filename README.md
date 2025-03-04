@@ -6,6 +6,8 @@ Descripción
 
 El sistema utiliza un **Arduino** y un **módulo ACS712** para capturar la señal de corriente alterna. A través de la **Transformada Rápida de Fourier (FFT)**, se convierte la señal al dominio de la frecuencia, permitiendo detectar posibles variaciones. Los datos obtenidos son graficados para su análisis.  
 
+Tambien cabe mencionar,que se desarrolló una implementación utilizando Python y Arduino, comunicándose a través de serial (UART). Esta integración permitió la adquisición y procesamiento de datos en tiempo real, facilitando la visualización de la frecuencia y posibles alteraciones en la señal mediante gráficos interactivos.
+
 Además, el proyecto incluye el diseño y fabricación de una caja de **MDF**, diseñada para soportar **1000 N de fuerza aplicada directamente sobre su superficie**, equivalente al peso de una persona de aproximadamente 110 kg. Para validar su resistencia, se realizó un análisis estructural en **SolidWorks**, identificando los puntos críticos y asegurando su integridad mecánica.  
 
 Componentes principales  
