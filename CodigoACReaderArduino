@@ -1,0 +1,65 @@
+const int pinSensor = A0; // Pin Analógico A0
+const int numeroDeMediciones = 800; // Mediciones que quiero
+int valoresSensor[numeroDeMediciones]; //Declaramos la lista donde se guardaran las mediciones
+unsigned long tiempoInicioMedicion; //Variable donde se guarda el inicio
+const int ledPin1 = 3; //VERDE
+const int ledPin2 = 5; //AMARILLO
+const int ledPin3 = 6; //ROJO
+
+void setup() {
+  Serial.begin(115200); //Seteamos el baudrate muy alto para que lea mas rápido
+  pinMode(ledPin1, OUTPUT); //Configura el pin del LED como salida
+  pinMode(ledPin2, OUTPUT); //Configura el pin del LED como salida
+  pinMode(ledPin3, OUTPUT); //Configura el pin del LED como salida
+}
+
+void loop() {
+  tiempoInicioMedicion = millis();
+  for (int i = 0; i < numeroDeMediciones; i++) {
+    delayMicroseconds(100); //Delay para asegurar mediciones correctas
+    valoresSensor[i] = analogRead(pinSensor); //Medicion guardada en la lista
+  }
+
+  long duracion = millis() - tiempoInicioMedicion; //Guardamos cuanto tiempo demoro en medir 
+
+  //Creamos un print para que python pueda leer los valores
+  for (int i = 0; i < numeroDeMediciones; i++) {
+    Serial.print(valoresSensor[i]);
+    if (i < numeroDeMediciones - 1) {
+      Serial.print(",");
+    }
+  }
+  //Creamos un print para que pueda leer cuanto demoro en leer los datos
+  delay(1);
+  Serial.println("");
+  Serial.println(duracion);
+
+  //Comprobamos si hay datos disponibles para leer desde Python
+  if (Serial.available() > 0) {
+    String received = Serial.readStringUntil('\n'); //Leemos la linea recibida
+    float centroDeMasa = received.toFloat(); //Convertimos la cadena a float
+
+    //Funcion que enciende o no el led Rojo si la frecuencia cambia mas de 1Hz (PELIGRO)
+    if (centroDeMasa > 61 || centroDeMasa < 59) {
+      digitalWrite(ledPin3, HIGH); //Enciende el LED
+    } else {
+      digitalWrite(ledPin3, LOW); //Apaga el LED
+    }
+
+    //Funcion que enciende o no el led aarillo si la frecuencia cambia mas de 0.25Hz (Advertencia)
+    if (centroDeMasa > 60.25 || centroDeMasa < 59.75) {
+      digitalWrite(ledPin2, HIGH); //Enciende el LED
+    } else {
+      digitalWrite(ledPin2, LOW); //Apaga el LED
+    }
+
+    //Funcion que enciende o no el led verde si la frecuencia medida entra en parametros realez
+    if (centroDeMasa > 50 || centroDeMasa < 70) {
+      digitalWrite(ledPin1, HIGH); //Enciende el LED
+    } else {
+      digitalWrite(ledPin1, LOW); //Apaga el LED
+    }
+  }
+
+  delay(100); //Delay entre mediciones
+}
