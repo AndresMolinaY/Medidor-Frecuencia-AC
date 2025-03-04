@@ -43,7 +43,8 @@ Funcionamiento
 
 3. **Diseño y simulación estructural**  
    - Modelado de la caja en **SolidWorks** considerando los requerimientos de carga.
-     ![Caja1](https://github.com/user-attachments/assets/9c93fd65-80f8-417f-8351-9502f8c49c18)
+
+![Caja1](https://github.com/user-attachments/assets/9c93fd65-80f8-417f-8351-9502f8c49c18)
 ![Caja2](https://github.com/user-attachments/assets/58f70408-7719-4ef1-8184-631abcc7145d)
 ![Caja3](https://github.com/user-attachments/assets/63bfc64c-ff7a-4c6a-ab13-6e43d44b4eab)
 
