@@ -32,9 +32,14 @@ Funcionamiento
    - Implementación de un circuito seguro para conectar el sensor al Arduino.  
 
 2. **Procesamiento de la señal**  
-   - Captura de datos en tiempo real mediante Arduino.  
+   - Captura de datos en tiempo real mediante Arduino.
+   ![image](https://github.com/user-attachments/assets/7dadae0c-5db3-4b89-b3fa-7269f09297d0)
+   
    - Aplicación de la **Transformada Rápida de Fourier (FFT)** para analizar la frecuencia.  
-   - Desarrollo de un sistema de visualización de datos en gráficos.  
+   - Desarrollo de un sistema de visualización de datos en gráficos.
+
+![medidor_frecuencia_ajustado](https://github.com/user-attachments/assets/a69eccfb-684b-4271-9e82-313574bcd068)
+
 
 3. **Diseño y simulación estructural**  
    - Modelado de la caja en **SolidWorks** considerando los requerimientos de carga.
