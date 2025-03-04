@@ -1,4 +1,4 @@
-![WhatsApp Image 2024-11-30 at 21 19 08_7acdb59f](https://github.com/user-attachments/assets/57c2df9b-315c-487a-a552-e0b846e0c8e1)![WhatsApp Image 2024-11-30 at 21 19 08_7acdb59f](https://github.com/user-attachments/assets/c7a39f62-3706-4867-ba6d-9c900e105d83)Medidor de Frecuencia de Corriente Alterna  
+#Medidor de Frecuencia de Corriente Alterna  
 
 Este proyecto fue desarrollado como parte de la materia **Integración Mecatrónica**. Consiste en un sistema capaz de medir la frecuencia de la corriente alterna de un conector convencional, analizar posibles alteraciones y visualizar los resultados de forma gráfica.  
 
