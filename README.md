@@ -65,12 +65,8 @@ Posibles mejoras
 
 - Aumentar la precisión del análisis utilizando sensores de mayor resolución.  
 - Integrar conectividad inalámbrica para monitoreo remoto.  
-- Optimizar el diseño estructural con materiales alternativos.  
-
-Galería  
-
-*(Aquí puedes agregar imágenes del proyecto y sus simulaciones en SolidWorks)*  
+- Optimizar el diseño estructural con materiales alternativos.
 
 Créditos  
 
-Proyecto desarrollado por [Tu Nombre / Equipo] para la materia **Integración Mecatrónica**.  
+Proyecto desarrollado por Kleber Molina para la materia **Integración Mecatrónica**.  
