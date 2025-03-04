@@ -1,0 +1,78 @@
+import serial
+import time
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# Configuraciones iniciales para el gráfico
+plt.ion()  # Modo interactivo
+fig, ax = plt.subplots(2, 1, figsize=(10, 8))  # Dos subgráficas: voltaje y centro de masa
+line1, = ax[0].plot([], [], label="Voltaje vs Tiempo", color="blue")
+line2, = ax[1].plot([], [], label="Centro de Masa", color="red")
+ax[0].set_title("Voltaje vs Tiempo")
+ax[0].set_xlabel("Tiempo (s)")
+ax[0].set_ylabel("Voltaje")
+ax[0].legend()
+ax[0].grid(True)
+ax[1].set_title("Centro de Masa de Frecuencia")
+ax[1].set_xlabel("Iteración")
+ax[1].set_ylabel("Centro de Masa (Hz)")
+ax[1].set_ylim(59, 61)  # Ajusta el rango del eje Y
+ax[1].legend()
+
+# Variables de almacenamiento
+centro_de_masa_lista = []
+iteraciones = []
+
+# Configuración del puerto serial
+dev = serial.Serial("COM7", 115200)
+time.sleep(1)
+
+contador = 0
+
+while True:
+    # Leer datos
+    lecturas = ((dev.readline()).decode("ascii")).split(",")
+    int_lecturas = [int(s) for s in lecturas]
+    tiempo = int(dev.readline().decode("ascii"))
+    numero_de_mediciones = len(lecturas)
+
+    # Calcular tiempo asociado a las lecturas
+    lecturas_tiempo = [round((tiempo / numero_de_mediciones) * (i), 8) for i in range(numero_de_mediciones)]
+    lecturas_array = np.array(int_lecturas)
+    tiempo_array = np.array(lecturas_tiempo)
+
+    # Actualizar gráfica Voltaje vs Tiempo
+    line1.set_data(tiempo_array, lecturas_array)
+    ax[0].relim()
+    ax[0].autoscale_view()
+
+    # FFT y filtro
+    N = len(lecturas_array)
+    T = tiempo_array[1] - tiempo_array[0]
+    yf = np.fft.fft(lecturas_array)
+    xf = np.fft.fftfreq(N, T)  # 'xf' en Hz
+
+    # Filtrar frecuencias de interés
+    xinicial = 0.05
+    xfinal = 0.08
+    tf_vals_menores_que_xfin_y_mayores_que_xinicial = (xf[:N // 2] <= xfinal) & (xf[:N // 2] > xinicial)
+    xf_filtrado = xf[:N // 2][tf_vals_menores_que_xfin_y_mayores_que_xinicial]
+    yf_filtrado = (2.0 / N * np.abs(yf[:N // 2]))[tf_vals_menores_que_xfin_y_mayores_que_xinicial]
+
+    # Calcular centro de masa
+    centro_masa = 1000*np.sum(xf_filtrado * yf_filtrado) / np.sum(yf_filtrado)
+    print(f'El centro de masa de la frecuencia (De 0 a {xfinal:.2f} Hz): {1000*centro_masa:.3f} Hz')
+
+    # Actualizar gráfica del centro de masa
+    centro_de_masa_lista.append(centro_masa)
+    iteraciones.append(contador)
+    line2.set_data(iteraciones, centro_de_masa_lista)
+    ax[1].relim()
+    ax[1].autoscale_view()
+
+    # Incrementar contador de iteraciones
+    contador += 1
+
+    # Refrescar las gráficas
+    plt.pause(0.01)
