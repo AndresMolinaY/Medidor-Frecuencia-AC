@@ -1,4 +1,4 @@
-##Medidor de Frecuencia de Corriente Alterna  
+## Medidor de Frecuencia de Corriente Alterna  
 
 Este proyecto fue desarrollado como parte de la materia **Integración Mecatrónica**. Consiste en un sistema capaz de medir la frecuencia de la corriente alterna de un conector convencional, analizar posibles alteraciones y visualizar los resultados de forma gráfica.  
 
